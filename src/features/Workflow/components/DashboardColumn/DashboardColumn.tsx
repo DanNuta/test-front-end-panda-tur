@@ -1,4 +1,3 @@
-import { HTMLAttributes } from "react";
 import { Flex } from "antd";
 import { BaseType } from "antd/es/typography/Base";
 
@@ -13,8 +12,7 @@ type Props = {
   workflowName: string;
   color: Exclude<BaseType, "danger">;
   onEdit: (id: string) => void;
-} & HTMLAttributes<HTMLDivElement> &
-  Omit<WorkflowTicket, "onAdd" | "onUpdate">;
+} & Omit<WorkflowTicket, "onAdd" | "onUpdate">;
 
 export const DashboardColumn = ({
   tickets,

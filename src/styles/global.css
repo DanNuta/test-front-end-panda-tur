@@ -1,0 +1,23 @@
+.text-center {
+  text-align: center;
+}
+
+.vh-100 {
+  height: 100vh;
+}
+
+.mb-24 {
+  margin-bottom: 24px;
+}
+
+.px-64 {
+  padding-inline: 64px;
+}
+
+.py-90 {
+  padding-block: 90px;
+}
+
+.ant-typography {
+  margin-bottom: 0 !important;
+}

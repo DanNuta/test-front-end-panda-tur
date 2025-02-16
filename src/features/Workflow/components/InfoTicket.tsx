@@ -3,8 +3,9 @@ import { Button, Card, Flex, Typography, CardProps, Tag } from "antd";
 
 import { PriorityTag } from "@/components";
 import { Ticket } from "@/types";
+import { getWorkflowSingular } from "@/utils";
 
-import { priorities, workflow as workflowData } from "../utils";
+import { priorities } from "../utils";
 
 const { Text, Paragraph } = Typography;
 
@@ -52,7 +53,7 @@ export const InfoTicket = ({
 
         <Flex align="center" gap={8}>
           <Text strong>Flux de lucru: </Text>
-          <Tag>{workflowData[workflow as keyof typeof workflowData]}</Tag>
+          <Tag>{getWorkflowSingular(workflow)}</Tag>
         </Flex>
 
         <Flex align="center" gap={8}>

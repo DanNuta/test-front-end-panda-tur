@@ -1,10 +1,10 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Card, Flex, Typography, CardProps } from "antd";
+import { Button, Card, Flex, Typography, CardProps, Tag } from "antd";
 
 import { PriorityTag } from "@/components";
 import { Ticket } from "@/types";
 
-import { priorities } from "../utils";
+import { priorities, workflow as workflowData } from "../utils";
 
 const { Text, Paragraph } = Typography;
 
@@ -19,6 +19,7 @@ export const InfoTicket = ({
   description,
   notes,
   priority,
+  workflow,
   onDeleteTicket,
   onEditTicket,
   ...restProps
@@ -43,22 +44,29 @@ export const InfoTicket = ({
       }
       {...restProps}
     >
-      <Flex align="center" gap={8}>
-        <Text strong>Descriere: </Text>
-        <Text italic>{description}</Text>
-      </Flex>
-
-      <Flex align="center" gap={8}>
-        <Text strong>Prioritate: </Text>
-        <PriorityTag priority={priority as keyof typeof priorities} />
-      </Flex>
-
-      {notes && (
+      <Flex vertical gap={12}>
         <Flex align="center" gap={8}>
-          <Text strong>Notes: </Text>
-          <Paragraph>{notes}</Paragraph>
+          <Text strong>Descriere: </Text>
+          <Text italic>{description}</Text>
         </Flex>
-      )}
+
+        <Flex align="center" gap={8}>
+          <Text strong>Flux de lucru: </Text>
+          <Tag>{workflowData[workflow as keyof typeof workflowData]}</Tag>
+        </Flex>
+
+        <Flex align="center" gap={8}>
+          <Text strong>Prioritate: </Text>
+          <PriorityTag priority={priority as keyof typeof priorities} />
+        </Flex>
+
+        {notes && (
+          <Flex align="center" gap={8}>
+            <Text strong>Notes: </Text>
+            <Paragraph>{notes}</Paragraph>
+          </Flex>
+        )}
+      </Flex>
     </Card>
   );
 };

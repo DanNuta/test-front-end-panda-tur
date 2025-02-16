@@ -8,11 +8,16 @@ import { DashboardColumn, EditTicketForm } from "../components";
 import { workflow } from "../utils";
 import { WorkflowTicket } from "../types";
 
+type Props = {
+  onUpdateWorkflowTicket: (workflow: number, id: string) => void;
+} & Omit<WorkflowTicket, "onAdd">;
+
 export const Dashboard = ({
   tickets,
   onDelete,
   onUpdate,
-}: Omit<WorkflowTicket, "onAdd">) => {
+  onUpdateWorkflowTicket,
+}: Props) => {
   const [idTicket, setIdTicket] = useState<string | null>(null);
 
   const col = tickets.reduce((accumulator, currentValue) => {
@@ -31,27 +36,30 @@ export const Dashboard = ({
         <Card>
           <Flex gap={24} justify="space-between">
             <DashboardColumn
-              onDelete={onDelete}
-              onEdit={(id) => setIdTicket(id)}
               color="secondary"
               tickets={col[0]}
               workflowName={workflow[0]}
+              onDelete={onDelete}
+              onEdit={setIdTicket}
+              onDropTicket={(id) => onUpdateWorkflowTicket(0, id)}
             />
 
             <DashboardColumn
-              onDelete={onDelete}
-              onEdit={(id) => setIdTicket(id)}
               color="warning"
               tickets={col[1]}
               workflowName={workflow[1]}
+              onDelete={onDelete}
+              onEdit={setIdTicket}
+              onDropTicket={(id) => onUpdateWorkflowTicket(1, id)}
             />
 
             <DashboardColumn
-              onDelete={onDelete}
-              onEdit={(id) => setIdTicket(id)}
               color="success"
               tickets={col[2]}
               workflowName={workflow[2]}
+              onDelete={onDelete}
+              onEdit={setIdTicket}
+              onDropTicket={(id) => onUpdateWorkflowTicket(2, id)}
             />
           </Flex>
 

@@ -26,6 +26,14 @@ export const Workflow = () => {
     );
   };
 
+  const updateWorkflowTicket = (workflow: number, ticketId: string) => {
+    setTickets((prev) =>
+      prev.map((ticket) =>
+        ticket.id === ticketId ? { ...ticket, workflow } : ticket
+      )
+    );
+  };
+
   const items: TabsProps["items"] = [
     {
       key: "1",
@@ -46,6 +54,7 @@ export const Workflow = () => {
         <Dashboard
           onDelete={deleteTicket}
           onUpdate={updateTicket}
+          onUpdateWorkflowTicket={updateWorkflowTicket}
           tickets={tickets}
         />
       ),

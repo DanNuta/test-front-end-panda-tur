@@ -1,0 +1,10 @@
+.drop-area {
+  height: 100px;
+  border-radius: 10px;
+  border: 1px dashed rgba(52, 64, 84, 0.5);
+  opacity: 1;
+}
+
+.hide-drop-area {
+  opacity: 0;
+}

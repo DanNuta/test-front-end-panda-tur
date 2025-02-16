@@ -18,7 +18,13 @@ export const CreateTicketForm = ({ onAddTicket }: Props) => {
         workflow: "0",
         priority: "0",
       }}
-      onFinish={(data) => onAddTicket(data)}
+      onFinish={(data) =>
+        onAddTicket({
+          ...data,
+          workflow: Number(data.workflow),
+          priority: Number(data.priority),
+        })
+      }
     >
       <Form.Item rules={[{ required: true }]} label="Titlu" name="title">
         <Input />

@@ -2,6 +2,7 @@ import { Form, Input, Radio } from "antd";
 
 import { PriorityTag } from "@/components";
 import { Ticket } from "@/types";
+import { getWorkflowSingular } from "@/utils";
 
 import { priorities, workflow } from "../utils";
 
@@ -18,7 +19,13 @@ export const CreateTicketForm = ({ onAddTicket }: Props) => {
         workflow: "0",
         priority: "0",
       }}
-      onFinish={(data) => onAddTicket(data)}
+      onFinish={(data) =>
+        onAddTicket({
+          ...data,
+          workflow: Number(data.workflow),
+          priority: Number(data.priority),
+        })
+      }
     >
       <Form.Item rules={[{ required: true }]} label="Titlu" name="title">
         <Input />
@@ -49,8 +56,8 @@ export const CreateTicketForm = ({ onAddTicket }: Props) => {
 
       <Form.Item label="Proces de lucru" name="workflow">
         <Radio.Group
-          options={Object.entries(workflow).map(([key, value]) => ({
-            label: value,
+          options={Object.keys(workflow).map((key) => ({
+            label: getWorkflowSingular(Number(key)),
             value: key,
           }))}
         />

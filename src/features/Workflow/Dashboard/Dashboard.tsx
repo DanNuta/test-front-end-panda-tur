@@ -1,4 +1,4 @@
-import { Card, Flex, Modal } from "antd";
+import { Flex, Modal } from "antd";
 import { useState } from "react";
 
 import { WorkflowWrapper } from "@/components";
@@ -20,7 +20,7 @@ export const Dashboard = ({
 }: Props) => {
   const [idTicket, setIdTicket] = useState<string | null>(null);
 
-  const col = tickets.reduce((accumulator, currentValue) => {
+  const cols = tickets.reduce((accumulator, currentValue) => {
     if (!accumulator[currentValue.workflow]) {
       accumulator[currentValue.workflow] = [];
     }
@@ -32,41 +32,23 @@ export const Dashboard = ({
 
   return (
     <>
-      <WorkflowWrapper title="Workflow Dashboard" subTitle="Panoul de lucru">
-        <Card>
-          <Flex gap={24} justify="space-between">
+      <WorkflowWrapper
+        title="Tablou de bord al fluxului de lucru"
+        subTitle="Panoul de lucru"
+      >
+        <Flex gap={24} justify="space-between">
+          {Object.entries(workflow).map(([key, { color, text }]) => (
             <DashboardColumn
-              color={workflow[0].color}
-              tickets={col[0]}
-              workflowName={`Tichete ${workflow[0].text}`}
+              key={key}
+              color={color}
+              tickets={cols[Number(key)]}
+              workflowName={`Tichete ${text}`}
               onDelete={onDelete}
               onEdit={setIdTicket}
-              onDropTicket={(id) => onUpdateWorkflowTicket(0, id)}
+              onDropTicket={(id) => onUpdateWorkflowTicket(Number(key), id)}
             />
-
-            <DashboardColumn
-              color={workflow[1].color}
-              tickets={col[1]}
-              workflowName={`Tichete ${workflow[1].text}`}
-              onDelete={onDelete}
-              onEdit={setIdTicket}
-              onDropTicket={(id) => onUpdateWorkflowTicket(1, id)}
-            />
-
-            <DashboardColumn
-              color={workflow[2].color}
-              tickets={col[2]}
-              workflowName={`Tichete ${workflow[2].text}`}
-              onDelete={onDelete}
-              onEdit={setIdTicket}
-              onDropTicket={(id) => onUpdateWorkflowTicket(2, id)}
-            />
-          </Flex>
-
-          {!tickets.length && (
-            <Flex justify="center">Nu există niciun tichet disponibil</Flex>
-          )}
-        </Card>
+          ))}
+        </Flex>
       </WorkflowWrapper>
 
       <Modal

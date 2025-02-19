@@ -20,7 +20,7 @@ export const Dashboard = ({
 }: Props) => {
   const [idTicket, setIdTicket] = useState<string | null>(null);
 
-  const col = tickets.reduce((accumulator, currentValue) => {
+  const cols = tickets.reduce((accumulator, currentValue) => {
     if (!accumulator[currentValue.workflow]) {
       accumulator[currentValue.workflow] = [];
     }
@@ -37,32 +37,17 @@ export const Dashboard = ({
         subTitle="Panoul de lucru"
       >
         <Flex gap={24} justify="space-between">
-          <DashboardColumn
-            color="secondary"
-            tickets={col[0]}
-            workflowName={workflow[0]}
-            onDelete={onDelete}
-            onEdit={setIdTicket}
-            onDropTicket={(id) => onUpdateWorkflowTicket(0, id)}
-          />
-
-          <DashboardColumn
-            color="warning"
-            tickets={col[1]}
-            workflowName={workflow[1]}
-            onDelete={onDelete}
-            onEdit={setIdTicket}
-            onDropTicket={(id) => onUpdateWorkflowTicket(1, id)}
-          />
-
-          <DashboardColumn
-            color="success"
-            tickets={col[2]}
-            workflowName={workflow[2]}
-            onDelete={onDelete}
-            onEdit={setIdTicket}
-            onDropTicket={(id) => onUpdateWorkflowTicket(2, id)}
-          />
+          {Object.entries(workflow).map(([key, { color, text }]) => (
+            <DashboardColumn
+              key={key}
+              color={color}
+              tickets={cols[Number(key)]}
+              workflowName={text}
+              onDelete={onDelete}
+              onEdit={setIdTicket}
+              onDropTicket={(id) => onUpdateWorkflowTicket(Number(key), id)}
+            />
+          ))}
         </Flex>
       </WorkflowWrapper>
 

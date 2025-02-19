@@ -31,8 +31,6 @@ export const DashboardColumn = ({
     setShowDropArea(false);
   };
 
-  console.log(showDropArea, "showDropArea");
-
   return (
     <Card
       className={`dashboard-column ${

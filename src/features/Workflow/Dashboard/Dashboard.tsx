@@ -34,7 +34,7 @@ export const Dashboard = ({
     <>
       <WorkflowWrapper
         title="Dashboard pentru gestionarea tichetelor"
-        subTitle="Gestionarea biletelor de lucru"
+        subTitle="Gestionarea tichetelor de lucru"
       >
         <Divider />
         <Card>

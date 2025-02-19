@@ -1,4 +1,4 @@
-import { Row, Col, Button, Modal, Flex, Divider } from "antd";
+import { Row, Col, Button, Modal, Flex, Divider, Typography } from "antd";
 import { useState } from "react";
 
 import { WorkflowWrapper } from "@/components";
@@ -6,6 +6,8 @@ import { WorkflowWrapper } from "@/components";
 import { InfoTicket, CreateTicketForm, EditTicketForm } from "../components";
 
 import { WorkflowTicket } from "../types";
+
+const { Title } = Typography;
 
 export const Ticket = ({
   tickets,
@@ -33,7 +35,6 @@ export const Ticket = ({
             ({ title, description, id, priority, notes, workflow }) => (
               <Col key={id} span={4}>
                 <InfoTicket
-                  hoverable
                   onDeleteTicket={() => onDelete(id)}
                   onEditTicket={() => setIdTicket(id)}
                   description={description}
@@ -47,7 +48,17 @@ export const Ticket = ({
           )}
         </Row>
       ) : (
-        <Flex justify="center">Nu există niciun tichet disponibil</Flex>
+        <Flex justify="center">
+          <Flex vertical gap={8} align="center">
+            <Title level={4}>Nu există niciun tichet disponibil</Title>
+            <Button
+              type="primary"
+              onClick={() => setIsOpenAddTicketModal(true)}
+            >
+              Adaugă un tichet nou
+            </Button>
+          </Flex>
+        </Flex>
       )}
 
       <Modal

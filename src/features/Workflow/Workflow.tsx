@@ -46,7 +46,7 @@ export const Workflow = () => {
   const items: TabsProps["items"] = [
     {
       key: "1",
-      label: "Tickets",
+      label: "Crearea tichetelor",
       children: (
         <Ticket
           tickets={tickets}
@@ -58,7 +58,7 @@ export const Workflow = () => {
     },
     {
       key: "2",
-      label: "Dashboard",
+      label: "Panou de control al tichetelor",
       children: (
         <Dashboard
           onDelete={deleteTicket}

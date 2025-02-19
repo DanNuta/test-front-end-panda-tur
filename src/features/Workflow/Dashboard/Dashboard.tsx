@@ -36,27 +36,27 @@ export const Dashboard = ({
         <Card>
           <Flex gap={24} justify="space-between">
             <DashboardColumn
-              color="secondary"
+              color={workflow[0].color}
               tickets={col[0]}
-              workflowName={workflow[0]}
+              workflowName={`Tichete ${workflow[0].text}`}
               onDelete={onDelete}
               onEdit={setIdTicket}
               onDropTicket={(id) => onUpdateWorkflowTicket(0, id)}
             />
 
             <DashboardColumn
-              color="warning"
+              color={workflow[1].color}
               tickets={col[1]}
-              workflowName={workflow[1]}
+              workflowName={`Tichete ${workflow[1].text}`}
               onDelete={onDelete}
               onEdit={setIdTicket}
               onDropTicket={(id) => onUpdateWorkflowTicket(1, id)}
             />
 
             <DashboardColumn
-              color="success"
+              color={workflow[2].color}
               tickets={col[2]}
-              workflowName={workflow[2]}
+              workflowName={`Tichete ${workflow[2].text}`}
               onDelete={onDelete}
               onEdit={setIdTicket}
               onDropTicket={(id) => onUpdateWorkflowTicket(2, id)}

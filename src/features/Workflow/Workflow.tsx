@@ -1,20 +1,21 @@
 import { Tabs, TabsProps } from "antd";
 
 import { Ticket as TicketType } from "@/types";
-import { TICKETS } from "@/app-constants";
+import { LOCAL_STORAGE_TICKETS } from "@/app-constants";
 import { useLocalStorage } from "@/hooks";
-
 import { getLocalStorage } from "@/features/Workflow/utils";
 
 import { Ticket } from "./Ticket";
 import { EditTicketData } from "./components";
 import { Dashboard } from "./Dashboard";
 
-const localStorageTikes = getLocalStorage(TICKETS) as TicketType[] | undefined;
+const localStorageTikes = getLocalStorage(LOCAL_STORAGE_TICKETS) as
+  | TicketType[]
+  | undefined;
 
 export const Workflow = () => {
   const [tickets, setTickets] = useLocalStorage(
-    TICKETS,
+    LOCAL_STORAGE_TICKETS,
     localStorageTikes ?? []
   );
 

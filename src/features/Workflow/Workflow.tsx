@@ -1,14 +1,22 @@
 import { Tabs, TabsProps } from "antd";
-import { useState } from "react";
 
 import { Ticket as TicketType } from "@/types";
+import { TICKETS } from "@/app-constants";
+import { useLocalStorage } from "@/hooks";
+
+import { getLocalStorage } from "@/features/Workflow/utils";
 
 import { Ticket } from "./Ticket";
 import { EditTicketData } from "./components";
 import { Dashboard } from "./Dashboard";
 
+const localStorageTikes = getLocalStorage(TICKETS) as TicketType[] | undefined;
+
 export const Workflow = () => {
-  const [tickets, setTickets] = useState<TicketType[]>([]);
+  const [tickets, setTickets] = useLocalStorage(
+    TICKETS,
+    localStorageTikes ?? []
+  );
 
   const addTicket = (ticket: Omit<TicketType, "id">) => {
     setTickets((prev) => [...prev, { id: crypto.randomUUID(), ...ticket }]);

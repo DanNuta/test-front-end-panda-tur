@@ -34,3 +34,12 @@ export const prioritiesColor: Record<string, PresetColorKey> = {
   medium: "orange",
   ridicat: "red",
 };
+
+export const setLocalStorage = (key: string, data: unknown) => {
+  localStorage.setItem(key, JSON.stringify(data));
+};
+
+export const getLocalStorage = (key: string) => {
+  const item = localStorage.getItem(key);
+  return item ? JSON.parse(item) : undefined;
+};

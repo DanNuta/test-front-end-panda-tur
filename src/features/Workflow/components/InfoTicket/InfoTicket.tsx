@@ -5,7 +5,9 @@ import { PriorityTag } from "@/components";
 import { Ticket } from "@/types";
 import { getWorkflowSingular } from "@/utils";
 
-import { priorities } from "../utils";
+import { priorities } from "@/features/Workflow/utils";
+
+import "./style.css";
 
 const { Text, Paragraph } = Typography;
 
@@ -27,6 +29,7 @@ export const InfoTicket = ({
 }: InfoTicketProps) => {
   return (
     <Card
+      className="info-ticket"
       title={title}
       extra={
         <Flex gap={4}>

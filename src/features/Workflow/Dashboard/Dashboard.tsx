@@ -42,7 +42,7 @@ export const Dashboard = ({
               key={key}
               color={color}
               tickets={cols[Number(key)]}
-              workflowName={text}
+              workflowName={`Tichete ${text}`}
               onDelete={onDelete}
               onEdit={setIdTicket}
               onDropTicket={(id) => onUpdateWorkflowTicket(Number(key), id)}

@@ -1,13 +1,13 @@
-import { Flex } from "antd";
+import { Flex, Card } from "antd";
 import { BaseType } from "antd/es/typography/Base";
 
 import { WorkflowTicket } from "@/features/Workflow/types";
-import { DropArea } from "@/components";
 
 import { TitleColumn } from "../TitleColumn";
 import { InfoTicket } from "../InfoTicket";
 
 import "./style.css";
+import { useState } from "react";
 
 type Props = {
   workflowName: string;
@@ -24,8 +24,25 @@ export const DashboardColumn = ({
   onEdit,
   onDropTicket,
 }: Props) => {
+  const [showDropArea, setShowDropArea] = useState(false);
+
+  const drop = (e: React.DragEvent) => {
+    onDropTicket(e.dataTransfer.getData("ticket"));
+    setShowDropArea(false);
+  };
+
+  console.log(showDropArea, "showDropArea");
+
   return (
-    <div className="dashboard-column">
+    <Card
+      className={`dashboard-column ${
+        showDropArea ? "drop-area" : "hide-drop-area"
+      }`}
+      onDragEnter={() => setShowDropArea(true)}
+      onDragLeave={() => setShowDropArea(false)}
+      onDragOver={(e) => e.preventDefault()}
+      onDrop={drop}
+    >
       <TitleColumn title={workflowName} color={color} count={tickets?.length} />
 
       <Flex vertical gap={12}>
@@ -42,8 +59,7 @@ export const DashboardColumn = ({
             }}
           />
         ))}
-        <DropArea onDrop={onDropTicket} />
       </Flex>
-    </div>
+    </Card>
   );
 };

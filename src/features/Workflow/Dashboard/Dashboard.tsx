@@ -1,4 +1,4 @@
-import { Card, Flex, Modal } from "antd";
+import { Flex, Modal } from "antd";
 import { useState } from "react";
 
 import { WorkflowWrapper } from "@/components";
@@ -32,41 +32,38 @@ export const Dashboard = ({
 
   return (
     <>
-      <WorkflowWrapper title="Workflow Dashboard" subTitle="Panoul de lucru">
-        <Card>
-          <Flex gap={24} justify="space-between">
-            <DashboardColumn
-              color="secondary"
-              tickets={col[0]}
-              workflowName={workflow[0]}
-              onDelete={onDelete}
-              onEdit={setIdTicket}
-              onDropTicket={(id) => onUpdateWorkflowTicket(0, id)}
-            />
+      <WorkflowWrapper
+        title="Tablou de bord al fluxului de lucru"
+        subTitle="Panoul de lucru"
+      >
+        <Flex gap={24} justify="space-between">
+          <DashboardColumn
+            color="secondary"
+            tickets={col[0]}
+            workflowName={workflow[0]}
+            onDelete={onDelete}
+            onEdit={setIdTicket}
+            onDropTicket={(id) => onUpdateWorkflowTicket(0, id)}
+          />
 
-            <DashboardColumn
-              color="warning"
-              tickets={col[1]}
-              workflowName={workflow[1]}
-              onDelete={onDelete}
-              onEdit={setIdTicket}
-              onDropTicket={(id) => onUpdateWorkflowTicket(1, id)}
-            />
+          <DashboardColumn
+            color="warning"
+            tickets={col[1]}
+            workflowName={workflow[1]}
+            onDelete={onDelete}
+            onEdit={setIdTicket}
+            onDropTicket={(id) => onUpdateWorkflowTicket(1, id)}
+          />
 
-            <DashboardColumn
-              color="success"
-              tickets={col[2]}
-              workflowName={workflow[2]}
-              onDelete={onDelete}
-              onEdit={setIdTicket}
-              onDropTicket={(id) => onUpdateWorkflowTicket(2, id)}
-            />
-          </Flex>
-
-          {!tickets.length && (
-            <Flex justify="center">Nu există niciun tichet disponibil</Flex>
-          )}
-        </Card>
+          <DashboardColumn
+            color="success"
+            tickets={col[2]}
+            workflowName={workflow[2]}
+            onDelete={onDelete}
+            onEdit={setIdTicket}
+            onDropTicket={(id) => onUpdateWorkflowTicket(2, id)}
+          />
+        </Flex>
       </WorkflowWrapper>
 
       <Modal

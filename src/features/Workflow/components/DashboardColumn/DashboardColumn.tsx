@@ -52,15 +52,14 @@ export const DashboardColumn = ({
       <Flex vertical gap={12}>
         {tickets?.map(({ id, ...ticket }) => (
           <InfoTicket
-            {...ticket}
             key={id}
-            className="ticket-card"
             draggable
             onDeleteTicket={() => onDelete(id)}
             onEditTicket={() => onEdit(id)}
             onDragStart={(e) => {
               e.dataTransfer.setData("ticket", id);
             }}
+            {...ticket}
           />
         ))}
       </Flex>

@@ -1,10 +1,14 @@
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Card, Flex, Typography, CardProps, Tag } from "antd";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  CheckCircleOutlined,
+  ClockCircleOutlined,
+  PlusCircleOutlined,
+} from "@ant-design/icons";
+import { Button, Card, Flex, Typography, CardProps, Divider } from "antd";
 
 import { PriorityTag } from "@/components";
 import { Ticket } from "@/types";
-import { getWorkflowSingular } from "@/utils";
-
 import { priorities } from "@/features/Workflow/utils";
 
 import "./style.css";
@@ -16,6 +20,12 @@ type InfoTicketProps = {
   onEditTicket: () => void;
 } & Omit<Ticket, "id"> &
   CardProps;
+
+const workflowIcons = {
+  0: <PlusCircleOutlined style={{ fontSize: 30 }} />,
+  1: <ClockCircleOutlined style={{ color: "#faad14", fontSize: 30 }} />,
+  2: <CheckCircleOutlined style={{ color: "#52c41a", fontSize: 30 }} />,
+};
 
 export const InfoTicket = ({
   title,
@@ -30,7 +40,7 @@ export const InfoTicket = ({
   return (
     <Card
       className="info-ticket"
-      title={title}
+      title={<Text>{title}</Text>}
       extra={
         <Flex gap={4}>
           <Button
@@ -48,27 +58,34 @@ export const InfoTicket = ({
       }
       {...restProps}
     >
-      <Flex vertical gap={12}>
-        <Flex align="center" gap={8}>
-          <Text strong>Descriere: </Text>
-          <Text italic>{description}</Text>
+      <Flex vertical>
+        <Flex className="mb-24" align="center" vertical gap={12}>
+          {workflowIcons[workflow as keyof typeof priorities]}
+          <Paragraph
+            className="text-center"
+            type="secondary"
+            ellipsis={{
+              rows: 3,
+              expandable: "collapsible",
+              symbol: (expended) =>
+                expended ? "Citește mai puțin" : "Citește mai mult",
+            }}
+          >
+            {description}
+          </Paragraph>
         </Flex>
 
-        <Flex align="center" gap={8}>
-          <Text strong>Flux de lucru: </Text>
-          <Tag>{getWorkflowSingular(workflow)}</Tag>
-        </Flex>
-
-        <Flex align="center" gap={8}>
+        <div className="priority">
           <Text strong>Prioritate: </Text>
           <PriorityTag priority={priority as keyof typeof priorities} />
-        </Flex>
+        </div>
 
         {notes && (
-          <Flex align="center" gap={8}>
+          <>
+            <Divider />
             <Text strong>Notes: </Text>
             <Paragraph>{notes}</Paragraph>
-          </Flex>
+          </>
         )}
       </Flex>
     </Card>

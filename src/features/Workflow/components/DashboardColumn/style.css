@@ -7,10 +7,6 @@
   min-height: calc(100vh - (180px + 146px));
 }
 
-.dashboard-column .ant-card-body {
-  padding: 16px;
-}
-
 .drop-area {
   background-color: rgba(0, 0, 0, 0.4);
   transition: all 0.3s;

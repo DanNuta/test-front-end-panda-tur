@@ -36,11 +36,11 @@ export const CreateTicketForm = ({ onAddTicket }: Props) => {
         label="Descriere"
         name="description"
       >
-        <Input placeholder="Descriere" />
+        <Input.TextArea placeholder="Descriere" />
       </Form.Item>
 
       <Form.Item label="Notițe" name="notes">
-        <Input placeholder="Notițe" />
+        <Input.TextArea rows={2} placeholder="Notițe" />
       </Form.Item>
 
       <Form.Item label="Prioritate" name="priority">

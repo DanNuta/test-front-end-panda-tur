@@ -1,4 +1,4 @@
-import { priorities, prioritiesColor } from "@/features/Workflow/utils";
+import { priorities } from "@/features/Workflow/utils";
 import { capitalizeFirstLetter } from "@/utils";
 import { Tag } from "antd";
 
@@ -7,11 +7,6 @@ type Props = {
 };
 
 export const PriorityTag = ({ priority }: Props) => {
-  const ticketPriority = priorities[priority];
-
-  return (
-    <Tag color={prioritiesColor[ticketPriority]}>
-      {capitalizeFirstLetter(ticketPriority)}
-    </Tag>
-  );
+  const { color, text } = priorities[priority];
+  return <Tag color={color}>{capitalizeFirstLetter(text)}</Tag>;
 };

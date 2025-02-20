@@ -10,6 +10,8 @@ type Props = {
   onEditTicket: (values: EditTicketData) => void;
 };
 
+const { TextArea } = Input;
+
 export const EditTicketForm = ({ onEditTicket, data }: Props) => {
   const [form] = Form.useForm();
 
@@ -35,11 +37,11 @@ export const EditTicketForm = ({ onEditTicket, data }: Props) => {
         label="Descriere"
         name="description"
       >
-        <Input />
+        <TextArea rows={3} />
       </Form.Item>
 
       <Form.Item label="Notițe" name="notes">
-        <Input placeholder="Notițe" />
+        <TextArea rows={2} placeholder="Notițe" />
       </Form.Item>
     </Form>
   );

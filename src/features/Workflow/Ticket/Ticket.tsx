@@ -18,6 +18,15 @@ export const Ticket = ({
   const [idTicket, setIdTicket] = useState<string | null>(null);
   const [isOpenAddTicketModal, setIsOpenAddTicketModal] = useState(false);
 
+  const confirmDelete = (id: string) => {
+    Modal.error({
+      title: "Ești sigur că dorești să ștergi acest tichet?",
+      okText: "Sterge",
+      okCancel: true,
+      onOk: () => onDelete(id),
+    });
+  };
+
   return (
     <WorkflowWrapper
       title={`Flux de lucru pentru tichete (${tickets.length})`}
@@ -35,7 +44,7 @@ export const Ticket = ({
             ({ title, description, id, priority, notes, workflow }) => (
               <Col key={id} span={4}>
                 <InfoTicket
-                  onDeleteTicket={() => onDelete(id)}
+                  onDeleteTicket={() => confirmDelete(id)}
                   onEditTicket={() => setIdTicket(id)}
                   description={description}
                   notes={notes}

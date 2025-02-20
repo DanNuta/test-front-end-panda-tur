@@ -1,4 +1,4 @@
-import { Flex, Modal } from "antd";
+import { Divider, Flex, Modal } from "antd";
 import { useState } from "react";
 
 import { WorkflowWrapper } from "@/components";
@@ -32,10 +32,7 @@ export const Dashboard = ({
 
   return (
     <>
-      <WorkflowWrapper
-        title="Tablou de bord al fluxului de lucru"
-        subTitle="Panoul de lucru"
-      >
+      <WorkflowWrapper title="Workflow Dashboard" subTitle="Panoul de lucru">
         <Flex gap={24} justify="space-between">
           {Object.entries(workflow).map(([key, { color, text }]) => (
             <DashboardColumn

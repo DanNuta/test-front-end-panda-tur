@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { Flex } from "antd";
+import { Flex, Typography } from "antd";
 
 const { Title, Text } = Typography;
 
@@ -8,9 +8,6 @@ type Props = {
   subTitle: string;
   extra?: React.ReactNode;
 };
-
-import "./style.css";
-import { Typography } from "antd";
 
 export const WorkflowWrapper = ({
   children,

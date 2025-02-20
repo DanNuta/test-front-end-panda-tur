@@ -28,7 +28,7 @@ export const CreateTicketForm = ({ onAddTicket }: Props) => {
       }
     >
       <Form.Item rules={[{ required: true }]} label="Titlu" name="title">
-        <Input />
+        <Input placeholder="Titlu" />
       </Form.Item>
 
       <Form.Item
@@ -36,11 +36,11 @@ export const CreateTicketForm = ({ onAddTicket }: Props) => {
         label="Descriere"
         name="description"
       >
-        <Input />
+        <Input placeholder="Descriere" />
       </Form.Item>
 
-      <Form.Item label="Notite" name="notes">
-        <Input />
+      <Form.Item label="Notițe" name="notes">
+        <Input placeholder="Notițe" />
       </Form.Item>
 
       <Form.Item label="Prioritate" name="priority">

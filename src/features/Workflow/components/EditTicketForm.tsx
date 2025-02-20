@@ -38,8 +38,8 @@ export const EditTicketForm = ({ onEditTicket, data }: Props) => {
         <Input />
       </Form.Item>
 
-      <Form.Item label="Notite" name="notes">
-        <Input />
+      <Form.Item label="Notițe" name="notes">
+        <Input placeholder="Notițe" />
       </Form.Item>
     </Form>
   );

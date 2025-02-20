@@ -1,4 +1,4 @@
-import { Divider, Flex, Modal } from "antd";
+import { Divider, Flex, Modal, Input } from "antd";
 import { useState } from "react";
 
 import { WorkflowWrapper } from "@/components";
@@ -7,6 +7,8 @@ import { Ticket } from "@/types";
 import { DashboardColumn, EditTicketForm } from "../components";
 import { workflow } from "../utils";
 import { WorkflowTicket } from "../types";
+
+const { Search } = Input;
 
 type Props = {
   onUpdateWorkflowTicket: (workflow: number, id: string) => void;
@@ -32,7 +34,12 @@ export const Dashboard = ({
 
   return (
     <>
-      <WorkflowWrapper title="Workflow Dashboard" subTitle="Panoul de lucru">
+      <WorkflowWrapper
+        title="Dashboard pentru gestionarea tichetelor"
+        subTitle="Gestionarea tichetelor de lucru"
+        extra={<Search className="mw-300" placeholder="Căutare" />}
+      >
+        <Divider />
         <Flex gap={24} justify="space-between">
           {Object.entries(workflow).map(([key, { color, text }]) => (
             <DashboardColumn
@@ -49,15 +56,16 @@ export const Dashboard = ({
       </WorkflowWrapper>
 
       <Modal
+        centered
+        destroyOnClose
+        okText="Salvează"
+        title="Modifică tichetul"
+        open={!!idTicket}
         okButtonProps={{
           form: "edit-ticket",
           htmlType: "submit",
         }}
-        centered
-        destroyOnClose
-        open={!!idTicket}
         onCancel={() => setIdTicket(null)}
-        title="Modifică tichetul"
       >
         <EditTicketForm
           data={tickets.find(({ id }) => id === idTicket)}

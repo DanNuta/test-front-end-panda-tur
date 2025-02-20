@@ -2,17 +2,17 @@ import { Form, Input } from "antd";
 import { useEffect } from "react";
 
 import { Ticket } from "@/types";
+import { FormProps } from "antd/lib";
 
 export type EditTicketData = Pick<Ticket, "title" | "description" | "notes">;
 
 type Props = {
   data?: EditTicketData;
-  onEditTicket: (values: EditTicketData) => void;
-};
+} & FormProps;
 
 const { TextArea } = Input;
 
-export const EditTicketForm = ({ onEditTicket, data }: Props) => {
+export const EditTicketForm = ({ data, ...props }: Props) => {
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -22,12 +22,7 @@ export const EditTicketForm = ({ onEditTicket, data }: Props) => {
   }, [data, form]);
 
   return (
-    <Form
-      form={form}
-      name="edit-ticket"
-      layout="vertical"
-      onFinish={onEditTicket}
-    >
+    <Form form={form} layout="vertical" {...props}>
       <Form.Item rules={[{ required: true }]} label="Titlu" name="title">
         <Input />
       </Form.Item>

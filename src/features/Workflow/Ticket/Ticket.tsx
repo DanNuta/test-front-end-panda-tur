@@ -4,7 +4,6 @@ import { useState } from "react";
 import { WorkflowWrapper } from "@/components";
 
 import { InfoTicket, CreateTicketForm, EditTicketForm } from "../components";
-
 import { WorkflowTicket } from "../types";
 
 const { Title } = Typography;
@@ -83,8 +82,13 @@ export const Ticket = ({
         title="Adaugă un tichet nou"
       >
         <CreateTicketForm
-          onAddTicket={(values) => {
-            onAdd(values);
+          name="add-ticket"
+          onFinish={({ workflow, priority, ...values }) => {
+            onAdd({
+              ...values,
+              workflow: Number(workflow),
+              priority: Number(priority),
+            });
             setIsOpenAddTicketModal(false);
           }}
         />
@@ -103,8 +107,9 @@ export const Ticket = ({
         title="Modifică tichetul"
       >
         <EditTicketForm
+          name="edit-ticket"
           data={tickets.find(({ id }) => id === idTicket)}
-          onEditTicket={(values) => {
+          onFinish={(values) => {
             if (idTicket) {
               onUpdate(values, idTicket);
               setIdTicket(null);

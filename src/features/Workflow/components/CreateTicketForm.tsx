@@ -1,4 +1,5 @@
 import { Form, Input, Radio } from "antd";
+import { FormProps } from "antd/lib";
 
 import { PriorityTag } from "@/components";
 import { Ticket } from "@/types";
@@ -6,11 +7,12 @@ import { getWorkflowSingular } from "@/utils";
 
 import { priorities, workflow } from "../utils";
 
-type Props = {
-  onAddTicket: (values: Ticket) => void;
-};
+type FormValues = Pick<
+  Ticket,
+  "title" | "description" | "notes" | "workflow" | "priority"
+>;
 
-export const CreateTicketForm = ({ onAddTicket }: Props) => {
+export const CreateTicketForm = (props: FormProps<FormValues>) => {
   return (
     <Form
       name="add-ticket"
@@ -19,13 +21,7 @@ export const CreateTicketForm = ({ onAddTicket }: Props) => {
         workflow: "0",
         priority: "0",
       }}
-      onFinish={(data) =>
-        onAddTicket({
-          ...data,
-          workflow: Number(data.workflow),
-          priority: Number(data.priority),
-        })
-      }
+      {...props}
     >
       <Form.Item rules={[{ required: true }]} label="Titlu" name="title">
         <Input placeholder="Titlu" />

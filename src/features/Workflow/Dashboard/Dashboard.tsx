@@ -100,8 +100,9 @@ export const Dashboard = ({
         onCancel={() => setIdTicket(null)}
       >
         <EditTicketForm
+          name="edit-ticket"
           data={tickets.find(({ id }) => id === idTicket)}
-          onEditTicket={(values) => {
+          onFinish={(values) => {
             if (idTicket) {
               onUpdate(values, idTicket);
               setIdTicket(null);

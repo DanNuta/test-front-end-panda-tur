@@ -8,5 +8,6 @@ type Props = {
 
 export const PriorityTag = ({ priority }: Props) => {
   const { color, text } = priorities[priority];
+
   return <Tag color={color}>{capitalizeFirstLetter(text)}</Tag>;
 };

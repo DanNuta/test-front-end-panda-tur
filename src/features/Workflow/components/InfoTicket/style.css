@@ -1,0 +1,7 @@
+.info-ticket {
+  box-shadow: 0px 2px 4px 0px #00000014;
+}
+
+.info-ticket .ant-card-body .ant-divider-horizontal {
+  margin-block: 10px !important;
+}

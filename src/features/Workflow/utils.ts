@@ -1,4 +1,3 @@
-import { PresetColorKey } from "antd/es/theme/internal";
 import { BaseType } from "antd/es/typography/Base";
 
 type WorkflowTag = {
@@ -7,32 +6,35 @@ type WorkflowTag = {
 };
 
 export const priorities = {
-  0: "scazut",
-  1: "medium",
-  2: "ridicat",
+  0: {
+    text: "scăzută",
+    color: "blue",
+  },
+  1: {
+    text: "medium",
+    color: "orange",
+  },
+  2: {
+    text: "ridicată",
+    color: "red",
+  },
 };
 
 export const workflow: Record<number, WorkflowTag> = {
   0: {
-    text: "creat",
+    text: "create",
     color: "secondary",
   },
 
   1: {
-    text: "preluat",
+    text: "preluate",
     color: "warning",
   },
 
   2: {
-    text: "finisat",
+    text: "finalizate",
     color: "success",
   },
-};
-
-export const prioritiesColor: Record<string, PresetColorKey> = {
-  scazut: "blue",
-  medium: "orange",
-  ridicat: "red",
 };
 
 export const setLocalStorage = (key: string, data: unknown) => {

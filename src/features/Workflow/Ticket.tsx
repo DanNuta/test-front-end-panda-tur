@@ -3,9 +3,8 @@ import { useState } from "react";
 
 import { WorkflowWrapper } from "@/components";
 
-import { InfoTicket, CreateTicketForm, EditTicketForm } from "../components";
-
-import { WorkflowTicket } from "../types";
+import { InfoTicket, CreateTicketForm, EditTicketForm } from "./components";
+import { WorkflowTicket } from "./types";
 
 const { Title } = Typography;
 
@@ -17,6 +16,15 @@ export const Ticket = ({
 }: WorkflowTicket) => {
   const [idTicket, setIdTicket] = useState<string | null>(null);
   const [isOpenAddTicketModal, setIsOpenAddTicketModal] = useState(false);
+
+  const confirmDelete = (id: string) => {
+    Modal.error({
+      title: "Ești sigur că dorești să ștergi acest tichet?",
+      okText: "Sterge",
+      okCancel: true,
+      onOk: () => onDelete(id),
+    });
+  };
 
   return (
     <WorkflowWrapper
@@ -35,7 +43,7 @@ export const Ticket = ({
             ({ title, description, id, priority, notes, workflow }) => (
               <Col key={id} span={4}>
                 <InfoTicket
-                  onDeleteTicket={() => onDelete(id)}
+                  onDeleteTicket={() => confirmDelete(id)}
                   onEditTicket={() => setIdTicket(id)}
                   description={description}
                   notes={notes}
@@ -62,6 +70,7 @@ export const Ticket = ({
       )}
 
       <Modal
+        okText="Crează"
         okButtonProps={{
           form: "add-ticket",
           htmlType: "submit",
@@ -73,14 +82,20 @@ export const Ticket = ({
         title="Adaugă un tichet nou"
       >
         <CreateTicketForm
-          onAddTicket={(values) => {
-            onAdd(values);
+          name="add-ticket"
+          onFinish={({ workflow, priority, ...values }) => {
+            onAdd({
+              ...values,
+              workflow: Number(workflow),
+              priority: Number(priority),
+            });
             setIsOpenAddTicketModal(false);
           }}
         />
       </Modal>
 
       <Modal
+        okText="Salvează"
         okButtonProps={{
           form: "edit-ticket",
           htmlType: "submit",
@@ -92,8 +107,9 @@ export const Ticket = ({
         title="Modifică tichetul"
       >
         <EditTicketForm
+          name="edit-ticket"
           data={tickets.find(({ id }) => id === idTicket)}
-          onEditTicket={(values) => {
+          onFinish={(values) => {
             if (idTicket) {
               onUpdate(values, idTicket);
               setIdTicket(null);

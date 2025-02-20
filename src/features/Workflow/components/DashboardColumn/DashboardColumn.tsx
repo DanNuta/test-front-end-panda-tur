@@ -1,8 +1,8 @@
-import { Flex } from "antd";
+import { Flex, Card } from "antd";
 import { BaseType } from "antd/es/typography/Base";
+import { useState } from "react";
 
 import { WorkflowTicket } from "@/features/Workflow/types";
-import { DropArea } from "@/components";
 
 import { TitleColumn } from "../TitleColumn";
 import { InfoTicket } from "../InfoTicket";
@@ -24,26 +24,45 @@ export const DashboardColumn = ({
   onEdit,
   onDropTicket,
 }: Props) => {
+  const [showDropArea, setShowDropArea] = useState(false);
+
+  const drop = (e: React.DragEvent) => {
+    onDropTicket(e.dataTransfer.getData("ticket"));
+    setShowDropArea(false);
+  };
+
+  const dragLeave = (e: React.DragEvent) => {
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setShowDropArea(false);
+    }
+  };
+
   return (
-    <div className="dashboard-column">
+    <Card
+      className={`dashboard-column ${
+        showDropArea ? "drop-area" : "hide-drop-area"
+      }`}
+      onDrop={drop}
+      onDragLeave={dragLeave}
+      onDragEnter={() => setShowDropArea(true)}
+      onDragOver={(e) => e.preventDefault()}
+    >
       <TitleColumn title={workflowName} color={color} count={tickets?.length} />
 
       <Flex vertical gap={12}>
         {tickets?.map(({ id, ...ticket }) => (
           <InfoTicket
-            {...ticket}
             key={id}
-            className="ticket-card"
             draggable
             onDeleteTicket={() => onDelete(id)}
             onEditTicket={() => onEdit(id)}
             onDragStart={(e) => {
               e.dataTransfer.setData("ticket", id);
             }}
+            {...ticket}
           />
         ))}
-        <DropArea onDrop={onDropTicket} />
       </Flex>
-    </div>
+    </Card>
   );
 };

@@ -62,6 +62,7 @@ export const Ticket = ({
       )}
 
       <Modal
+        okText="Crează"
         okButtonProps={{
           form: "add-ticket",
           htmlType: "submit",
@@ -81,6 +82,7 @@ export const Ticket = ({
       </Modal>
 
       <Modal
+        okText="Salvează"
         okButtonProps={{
           form: "edit-ticket",
           htmlType: "submit",

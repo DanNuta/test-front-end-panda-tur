@@ -3,8 +3,8 @@ import { useState } from "react";
 
 import { WorkflowWrapper } from "@/components";
 
-import { InfoTicket, CreateTicketForm, EditTicketForm } from "../components";
-import { WorkflowTicket } from "../types";
+import { InfoTicket, CreateTicketForm, EditTicketForm } from "./components";
+import { WorkflowTicket } from "./types";
 
 const { Title } = Typography;
 

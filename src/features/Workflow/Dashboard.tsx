@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { WorkflowWrapper } from "@/components";
 import { Ticket } from "@/types";
 
-import { DashboardColumn, EditTicketForm } from "../components";
-import { workflow } from "../utils";
-import { WorkflowTicket } from "../types";
+import { DashboardColumn, EditTicketForm } from "./components";
+import { workflow } from "./utils";
+import { WorkflowTicket } from "./types";
 
 const { Search } = Input;
 
